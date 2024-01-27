@@ -51,15 +51,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   }, [isScreenSmall, setSidebarOpen,width]);
   return (
     <div className="relative">
-      <div className="">
+      <div className="absolute top-16 md:top-0 md:relative max-h-full z-20 md:z-40">
         <div
           className={`${mainsidebarOpen || sidebarOpen
-              ? "active w-80 md:w-[360px] "
+              ? "active w-80 md:w-[360px]"
               : "hidden md:block w-20"
-            } dark:bg-darkbg dark:text-white bg-white absolute md:relative top-0 z-40 h-screen overflow-auto shadow-lg`}
+            } dark:bg-darkbg dark:text-white bg-white overflow-auto shadow-lg relative`}
         >
           <div
-            className={`py-4 px-4 flex flex-col ${mainsidebarOpen || sidebarOpen ? "gap-0" : "gap-2"
+            className={`py-4 px-4 fixed h-screen top-16 md:top-0 bg-white flex flex-col ${mainsidebarOpen || sidebarOpen ? "gap-0" : "gap-2"
               }  `}
           >
             <div className="w-full h-24 hidden md:flex justify-between items-center">

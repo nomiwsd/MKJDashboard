@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <div className="relative">
       {" "}
-      <header className="h-16 flex justify-between items-center sticky top-0 z-50 md:z-30 shadow-xl dark:bg-darkbg dark:text-white bg-white w-full py-2 px-4">
+      <header className="h-16 flex justify-between items-center sticky top-0 z-40 md:z-30 shadow-xl dark:bg-darkbg dark:text-white bg-white w-full py-2 px-4">
         <div className="w-full">
           {isScreenSmall && (
             <button onClick={toggleSidebar} className="block md:hidden">
