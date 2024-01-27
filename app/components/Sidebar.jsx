@@ -59,7 +59,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             } dark:bg-darkbg dark:text-white bg-white overflow-auto shadow-lg relative`}
         >
           <div
-            className={`py-4 px-4 fixed h-screen top-16 md:top-0 bg-white flex flex-col ${mainsidebarOpen || sidebarOpen ? "gap-0" : "gap-2"
+            className={`py-4 px-4 fixed h-screen top-16 md:top-0 bg-white dark:bg-darkbg flex flex-col ${mainsidebarOpen || sidebarOpen ? "gap-0" : "gap-2"
               }  `}
           >
             <div className="w-full h-24 hidden md:flex justify-between items-center">
