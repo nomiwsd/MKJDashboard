@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { useEffect, useState } from "react";
 import Logo from "../../public/next.svg";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
@@ -24,15 +24,16 @@ import DonutSmallIcon from "@mui/icons-material/DonutSmall";
 import EmailIcon from "@mui/icons-material/Email";
 import FlagIcon from "@mui/icons-material/Flag";
 import Image from "next/image";
-import Navbar from "./Navbar";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+  const mainwidth = typeof window !== 'undefined' ? window.innerWidth : 0;
   const [mainsidebarOpen, setMainSidebarOpen] = useState(false);
-  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 600);
+  const [isScreenSmall, setIsScreenSmall] = useState(mainwidth < 600);
   console.log(isScreenSmall);
+  
   useEffect(() => {
     const handleResize = () => {
-      setIsScreenSmall(window.innerWidth < 600);
+      setIsScreenSmall(mainwidth < 600);
     };
 
     if (isScreenSmall) {
