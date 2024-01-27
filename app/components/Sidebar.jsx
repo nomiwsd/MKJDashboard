@@ -126,7 +126,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <div className="!border-none !shadow-none rounded-md">
                   <Accordion className="bg-transparent dark:bg-darkbg !shadow-none !border-none !rounded-md">
                     <AccordionSummary
-                      className=" text-black group dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md  dark:hover:bg-primarycl !px-2"
+                      className=" text-black group dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md  dark:hover:bg-primarycl"
                       expandIcon={
                         <ExpandMoreIcon
                           className={`
@@ -257,7 +257,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <div className="!border-none !shadow-none rounded-md">
                   <Accordion className="bg-transparent dark:bg-darkbg !shadow-none !border-none !rounded-md">
                     <AccordionSummary
-                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl !px-2"
+                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl "
                       expandIcon={
                         <ExpandMoreIcon
                           className={`
@@ -366,7 +366,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <div className="!border-none !shadow-none rounded-md">
                   <Accordion className="bg-transparent dark:bg-darkbg !shadow-none !border-none !rounded-md">
                     <AccordionSummary
-                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl !px-2"
+                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl "
                       expandIcon={
                         <ExpandMoreIcon
                           className={`
@@ -423,7 +423,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <div className="!border-none !shadow-none rounded-md">
                   <Accordion className="bg-transparent dark:bg-darkbg !shadow-none !border-none !rounded-md">
                     <AccordionSummary
-                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl !px-2"
+                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl "
                       expandIcon={
                         <ExpandMoreIcon
                           className={`
