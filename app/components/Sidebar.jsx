@@ -53,7 +53,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       <div className="">
         <div
           className={`${mainsidebarOpen || sidebarOpen
-              ? "active w-80 md:w-[360px] lg:w-[340px]"
+              ? "active w-80 md:w-[360px] "
               : "hidden md:block w-20"
             } dark:bg-darkbg dark:text-white bg-white absolute md:relative top-0 z-40 h-screen overflow-auto shadow-lg`}
         >
