@@ -26,14 +26,14 @@ import FlagIcon from "@mui/icons-material/Flag";
 import Image from "next/image";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  const mainwidth = typeof window !== 'undefined' ? window.innerWidth : 0;
+  const width = typeof window !== 'undefined' ? window.innerWidth : 0;
   const [mainsidebarOpen, setMainSidebarOpen] = useState(false);
-  const [isScreenSmall, setIsScreenSmall] = useState(mainwidth < 600);
+  const [isScreenSmall, setIsScreenSmall] = useState(width < 600);
   console.log(isScreenSmall);
   
   useEffect(() => {
     const handleResize = () => {
-      setIsScreenSmall(mainwidth < 600);
+      setIsScreenSmall(width <= 600);
     };
 
     if (isScreenSmall) {
@@ -48,7 +48,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [isScreenSmall, setSidebarOpen]);
+  }, [isScreenSmall, setSidebarOpen,width]);
   return (
     <div className="relative">
       <div className="">
@@ -126,7 +126,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <div className="!border-none !shadow-none rounded-md">
                   <Accordion className="bg-transparent dark:bg-darkbg !shadow-none !border-none !rounded-md">
                     <AccordionSummary
-                      className=" text-black group dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md  dark:hover:bg-primarycl"
+                      className=" text-black group dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md  dark:hover:bg-primarycl !px-2"
                       expandIcon={
                         <ExpandMoreIcon
                           className={`
@@ -155,7 +155,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <PersonAddIcon className="text-4xl text-black dark:text-white w-full" />
+                          <PersonAddIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black text-base dark:text-white font-semibold w-full"
                             href="/adminuser/newadmin"
@@ -174,7 +174,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <SupervisorAccountIcon className="text-4xl text-black dark:text-white w-full " />
+                          <SupervisorAccountIcon className="text-4xl text-black dark:text-white w-1/4 " />
                           <Link
                             className="text-black text-base font-semibold dark:text-white w-full"
                             href="/adminuser/admin"
@@ -193,7 +193,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <AddModeratorIcon className="text-4xl text-black dark:text-white w-full" />
+                          <AddModeratorIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black text-base font-semibold w-full dark:text-white"
                             href="/adminuser/mainadminuser"
@@ -211,7 +211,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <PersonAddIcon className="text-4xl text-black dark:text-white w-full" />
+                          <PersonAddIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black text-base font-semibold w-full dark:text-white"
                             href="/adminuser/coadmin"
@@ -229,7 +229,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <CategoryIcon className="text-4xl text-black dark:text-white w-full" />
+                          <CategoryIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black text-base font-semibold w-full dark:text-white"
                             href="/adminuser/addcategory"
@@ -257,7 +257,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <div className="!border-none !shadow-none rounded-md">
                   <Accordion className="bg-transparent dark:bg-darkbg !shadow-none !border-none !rounded-md">
                     <AccordionSummary
-                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl"
+                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl !px-2"
                       expandIcon={
                         <ExpandMoreIcon
                           className={`
@@ -286,7 +286,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black dark:bg-darkbg group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <PersonAddIcon className="text-4xl text-black dark:text-white  w-full" />
+                          <PersonAddIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black  dark:text-white text-base font-semibold w-full"
                             href="/websiteuser/alluser"
@@ -366,7 +366,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <div className="!border-none !shadow-none rounded-md">
                   <Accordion className="bg-transparent dark:bg-darkbg !shadow-none !border-none !rounded-md">
                     <AccordionSummary
-                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl"
+                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl !px-2"
                       expandIcon={
                         <ExpandMoreIcon
                           className={`
@@ -395,7 +395,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <ArticleIcon className="text-4xl text-black dark:text-white w-full" />
+                          <ArticleIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black text-base  dark:text-white font-semibold w-full"
                             href="/pagesettings/mainpagesettings"
@@ -423,7 +423,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <div className="!border-none !shadow-none rounded-md">
                   <Accordion className="bg-transparent dark:bg-darkbg !shadow-none !border-none !rounded-md">
                     <AccordionSummary
-                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl"
+                      className=" text-black group  dark:bg-darkbg dark:text-white hover:bg-primarycl !rounded-md dark:!rounded-md dark:hover:bg-primarycl !px-2"
                       expandIcon={
                         <ExpandMoreIcon
                           className={`
@@ -452,7 +452,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <LanguageIcon className="text-4xl text-black dark:text-white w-full" />
+                          <LanguageIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black text-base  dark:text-white font-semibold w-full"
                             href="/generalsettings/sitesetting"
@@ -471,7 +471,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <WebIcon className="text-4xl text-black dark:text-white w-full " />
+                          <WebIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black text-base  dark:text-white font-semibold w-full"
                             href="/generalsettings/thirdpartysettings"
@@ -490,7 +490,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <DonutSmallIcon className="text-4xl text-black dark:text-white w-full" />
+                          <DonutSmallIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black text-base font-semibold  dark:text-white w-full"
                             href="/generalsettings/smtpsettings"
@@ -508,7 +508,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <EmailIcon className="text-4xl text-black dark:text-white w-full" />
+                          <EmailIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black text-base font-semibold  dark:text-white w-full"
                             href="/generalsettings/emailsettings"
@@ -526,7 +526,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <EmailIcon className="text-4xl text-black dark:text-white w-full" />
+                          <EmailIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black text-base  dark:text-white font-semibold w-full"
                             href="/generalsettings/emailtemplates"
@@ -544,7 +544,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           }
                           className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-4 py-2 flex justify-center items-center gap-4 w-full rounded-md"
                         >
-                          <FlagIcon className="text-4xl text-black dark:text-white w-full" />
+                          <FlagIcon className="text-4xl text-black dark:text-white w-1/4" />
                           <Link
                             className="text-black text-base font-semibold  dark:text-white w-full"
                             href="/generalsettings/countrysettings"

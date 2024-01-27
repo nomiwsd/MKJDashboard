@@ -2,6 +2,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import Category from '../../components/Category';
+if (typeof window !== 'undefined') {
 const useLocalStorage = (key, defaultValue) => {
   const storedValue = localStorage.getItem(key);
   const initial = storedValue ? JSON.parse(storedValue) : defaultValue;
@@ -14,7 +15,7 @@ const useLocalStorage = (key, defaultValue) => {
 
   return [value, setValue];
 };
-
+}
 const AddCategory = () => {
   const [categories, setCategories] = useLocalStorage('categories', []);
   const [newCategory, setNewCategory] = useState({
