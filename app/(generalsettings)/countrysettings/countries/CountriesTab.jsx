@@ -454,7 +454,7 @@ export default function CountriesTab() {
                       <div className="flex flex-col gap-0 w-full md:w-1/2">
                         <b className="text-base font-medium">State</b>
                         <input
-                          onChange={onChangeHandler}
+                          // onChange={onChangeHandler}
                           defaultValue={input.state}
                           required
                           className="text-black w-full dark:text-white bg-transparent outline-none border border-gray-200 py-1 rounded-md px-2"
@@ -467,7 +467,7 @@ export default function CountriesTab() {
                       <div className="flex flex-col w-full md:w-1/2">
                         <b className="text-base font-medium">City</b>
                         <input
-                          onChange={onChangeHandler}
+                          // onChange={onChangeHandler}
                           defaultValue={input.city}
                           required
                           className="dark:text-white text-sm w-full text-black bg-transparent outline-none border border-gray-200 py-1 rounded-md px-2"
@@ -481,7 +481,7 @@ export default function CountriesTab() {
                   </div>
                   <div className="flex justify-center gap-3 py-4">
                     <button
-                      onClick={resetHandler}
+                      // onClick={resetHandler}
                       className="rounded-md bg-primarycl h-10  w-20 px-4 py-2  hover:text-black hover:bg-white hover:border hover:border-primarycl text-white"
                       type="button"
                     >
