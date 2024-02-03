@@ -1,28 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 
 
 const QuillEditor = dynamic(() => import('react-quill'), { ssr: false });
 
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: '#fff  ',
-  boxShadow: 24,
-  p: 4,
-};
-
-const AdvertiseDraftMail = ({isOpen}) => {  
-    const [accordionOne, setAccordionOne] = useState(true);  
+const AdvertiseDraftMail = () => {  
     const [subject, setSubject] = useState("Advertise Draft Mail");
     const defaultTemplate = `
       <p><strong>@user_name,</strong></p>
@@ -70,23 +53,9 @@ const AdvertiseDraftMail = ({isOpen}) => {
     const handleEditorChange = (newContent) => {
       setContent(newContent);
     };
-    return (
-    
+    return ( 
     <div>
-      <Accordion expanded={accordionOne} className="w-full " style={{ padding: "0px" }}>
-        <AccordionSummary
-          onClick={() => setAccordionOne(!accordionOne)}
-          className='bg-white dark:bg-darkbg'
-          expandIcon={<ExpandMoreIcon className="dark:text-white" />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <button className="dark:text-white text-black  font-bold text-md ">
-            Advertise Draft Mail
-          </button>
-        </AccordionSummary>
-        <AccordionDetails className="dark:bg-gray-700">
-          <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
             <div className="flex flex-col gap-3">
               <div className='px-2'>
                 <h1 className='text-base font-bold text-black dark:text-white'>Subject</h1>
@@ -100,7 +69,7 @@ const AdvertiseDraftMail = ({isOpen}) => {
               </div>
               <div className='px-2'>
                 <h1 className='text-base font-bold text-black dark:text-white'>Message</h1>
-                <div className="max-h-[500px] w-80 md:w-[450px]">
+                <div className="max-h-[500px]">
           <QuillEditor
             value={defaultTemplate || ''}
             onChange={handleEditorChange}
@@ -121,8 +90,6 @@ const AdvertiseDraftMail = ({isOpen}) => {
               </div>
             </div>
           </div>
-        </AccordionDetails>
-      </Accordion>
     </div>
   )
 }

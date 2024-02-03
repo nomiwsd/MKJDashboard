@@ -40,8 +40,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
     };
   }, [isScreenSmall, setSidebarOpen, setMainSidebarOpen, width]);
   return (
-    <aside className={`${mainsidebarOpen || sidebarOpen ? "active md:w-64" : "hidden md:block w-14"} dark:bg-darkbg dark:text-white bg-white fixed top-16 md:top-0 z-20 md:z-50 h-full overflow-auto shadow-lg`}>
-      <div className={`py-2 bg-white dark:bg-darkbg flex flex-col ${mainsidebarOpen || sidebarOpen ? "gap-1 px-4" : "gap-2 px-2"
+    <aside className={`${mainsidebarOpen || sidebarOpen ? "active md:w-56" : "hidden md:block w-14"} dark:bg-darkbg dark:text-white bg-white fixed top-16 md:top-0 z-20 md:z-50 h-full overflow-auto shadow-lg`}>
+      <div className={`py-2 bg-white dark:bg-darkbg flex flex-col ${mainsidebarOpen || sidebarOpen ? "gap-1 px-2" : "gap-2 px-2"
           }  `}>
         <div className="w-full h-16 hidden md:flex justify-between items-center">
           <div className="w-full">
@@ -77,10 +77,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
           href="/"
           className="hover:bg-primarycl group rounded-md h-10"
         >
-          <div className="flex items-center gap-1 h-full px-1">
+          <div className="flex items-center h-full">
             <button
               onClick={() => setMainSidebarOpen(true)}
-              className="w-10 h-10"
+              className="w-10 h-8"
             >
               <DashboardIcon className="text-black dark:text-white group-hover:text-white text-2xl" />
             </button>
@@ -116,7 +116,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <PersonAddIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <PersonAddIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base dark:text-white font-medium w-full"
                     href="/newadmin"
@@ -135,7 +135,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <SupervisorAccountIcon className="text-2xl text-black dark:text-white w-1/4 " />
+                  <SupervisorAccountIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base font-medium dark:text-white w-full"
                     href="/admin"
@@ -154,7 +154,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <AddModeratorIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <AddModeratorIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base font-medium w-full dark:text-white"
                     href="/mainadminuser"
@@ -172,7 +172,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <PersonAddIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <PersonAddIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base font-medium w-full dark:text-white"
                     href="/coadmin"
@@ -190,7 +190,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <CategoryIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <CategoryIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base font-medium w-full dark:text-white"
                     href="/addcategory"
@@ -225,9 +225,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <PersonIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <PersonIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
-                    className="text-black text-base dark:text-white font-semibold w-full"
+                    className="text-black text-base dark:text-white font-medium w-full"
                     href="/alluser"
                   >
                     All Users
@@ -249,10 +249,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
           href="/advertisementmanagement"
           className="hover:bg-primarycl group rounded-md h-10"
         >
-          <div className="flex items-center gap-1 h-full px-1">
+          <div className="flex items-center h-full">
             <button
               onClick={() => setMainSidebarOpen(true)}
-              className="w-10 h-10"
+              className="w-10 h-8"
             >
               <AddCardIcon className="text-black dark:text-white group-hover:text-white text-2xl" />
             </button>
@@ -276,10 +276,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
           href="/formmanagement"
           className="hover:bg-primarycl group rounded-md h-10"
         >
-          <div className="flex items-center gap-1 h-full px-1">
+          <div className="flex items-center h-full">
             <button
               onClick={() => setMainSidebarOpen(true)}
-              className="w-10 h-10"
+              className="w-10 h-8"
             >
               <DynamicFormIcon className="text-black dark:text-white group-hover:text-white text-2xl" />
             </button>
@@ -311,9 +311,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                       setMainSidebarOpen(false);
                     })
                   }
-                  className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
+                  className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-2 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <ArticleIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <ArticleIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base dark:text-white font-medium w-full"
                     href="/mainpagesettings"
@@ -349,7 +349,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <LanguageIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <LanguageIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base  dark:text-white font-medium w-full"
                     href="/sitesetting"
@@ -368,7 +368,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <WebIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <WebIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base  dark:text-white font-medium w-full"
                     href="/thirdpartysettings"
@@ -387,7 +387,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <DonutSmallIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <DonutSmallIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base font-medium  dark:text-white w-full"
                     href="/smtpsettings"
@@ -405,7 +405,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <EmailIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <EmailIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base font-medium dark:text-white w-full"
                     href="/emailsettings"
@@ -423,7 +423,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black  group hover:bg-gray-300 px-3 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <EmailIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <EmailIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base  dark:text-white font-medium w-full"
                     href="/emailtemplates"
@@ -441,7 +441,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, setMainSidebarOpen, mainsidebarO
                   }
                   className="dark:hover:bg-gray-500 text-black group hover:bg-gray-300 px-2 flex justify-center items-center gap-2 w-full h-10"
                 >
-                  <FlagIcon className="text-2xl text-black dark:text-white w-1/4" />
+                  <FlagIcon className="text-xl text-black dark:text-white w-5" />
                   <Link
                     className="text-black text-base font-medium  dark:text-white w-full"
                     href="/countrysettings"
