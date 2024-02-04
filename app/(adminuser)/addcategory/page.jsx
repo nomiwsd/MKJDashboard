@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import EditIcon from '@mui/icons-material/Edit';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -32,6 +33,7 @@ const useLocalStorage = (key, defaultValue) => {
 
   return [value, setValue];
 };
+
 const AddCategory = () => {
   const [categories, setCategories] = useLocalStorage('categories', []);
   const [rows, setRows] = useState([]);
@@ -52,24 +54,21 @@ const AddCategory = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleActionClick = (event) => {
+  const handleActionClick = (event, rowId) => {
     setAnchorEl(event.currentTarget);
+    setSelectedCategoryId(rowId);
   };
+
 
   const handleActionClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleEditMenuClick = (id) => {
-    handleActionClose();
-    handleEdit(id);
   };
 
   const handleDeleteMenuClick = (id) => {
     handleActionClose();
     handleDelete(id);
   };
-  // Initialize rows from the categories stored in local storage
+
   useEffect(() => {
     setRows(categories.map((category, index) => ({
       ...category,
@@ -107,35 +106,45 @@ const AddCategory = () => {
       alert('Please provide a valid image URL, at least one title, and a main heading.');
     }
   };
-
-  const handleEdit = (id) => {
-    const selectedCategory = categories.find(category => category.id === id);
-
-    if (selectedCategory) {
-      setNewCategory({
-        imageUrl: selectedCategory.categoryimg || '',
-        titles: [selectedCategory.firsttitle || '', selectedCategory.secondtitle || '', selectedCategory.thirdtitle || ''],
-        mainHeading: selectedCategory.categoryname || '',
-      });
-
-      setSelectedCategoryId(id);
-      handleOpenEditModal();
-    } else {
-      console.error(`Category with ID ${id} not found.`);
+  useEffect(() => {
+    if (selectedCategoryId !== null) {
+      const selectedCategory = categories.find(category => category.id === selectedCategoryId);
+  
+      if (selectedCategory) {
+        setNewCategory({
+          imageUrl: selectedCategory.categoryimg || '',
+          titles: [selectedCategory.firsttitle || '', selectedCategory.secondtitle || '', selectedCategory.thirdtitle || ''],
+          mainHeading: selectedCategory.categoryname || '',
+        });
+      } else {
+        console.error(`Category with ID ${selectedCategoryId} not found.`);
+      }
     }
+  }, [selectedCategoryId, categories]);
+  
+  const handleEdit = (row) => {
+    // console.log('Row Data:', row);
+    setSelectedCategoryId(prevCategoryId => row.id || prevCategoryId);
+    setEditModalOpen(true);
   };
-
-  const handleDelete = (id) => {
-    const updatedCategories = categories.filter(category => category.id !== id);
-    setCategories(updatedCategories);
-    setRows(prevRows => prevRows.filter(row => row.id !== id));
+  
+  const handleInputChange = (index, value) => {
+    setNewCategory(prevCategory => {
+      const updatedTitles = [...prevCategory.titles];
+      updatedTitles[index] = value;
+  
+      // console.log('New Category:', {
+      //   ...prevCategory,
+      //   titles: updatedTitles,
+      // });
+  
+      return {
+        ...prevCategory,
+        titles: updatedTitles,
+      };
+    });
   };
-  const handleModalClose = () => {
-    setNewCategory({ imageUrl: '', titles: ['', '', ''], mainHeading: '' });
-    setSelectedCategoryId(null);
-    handleCloseEditModal();
-  };
-
+  
   const handleSaveEdit = () => {
     const updatedCategories = categories.map(category => {
       if (category.id === selectedCategoryId) {
@@ -151,7 +160,9 @@ const AddCategory = () => {
         return category;
       }
     });
-
+  
+    console.log('Updated Categories:', updatedCategories);
+  
     setCategories(updatedCategories);
     setRows(prevRows => prevRows.map(row => {
       if (row.id === selectedCategoryId) {
@@ -167,16 +178,25 @@ const AddCategory = () => {
         return row;
       }
     }));
-
+  
+    console.log('New Rows:', rows);
+  
     handleModalClose();
   };
+  
 
-  const handleInputChange = (index, value) => {
-    setNewCategory(prevCategory => ({
-      ...prevCategory,
-      titles: prevCategory.titles.map((title, i) => (i === index ? value : title)),
-    }));
+  const handleDelete = (id) => {
+    const updatedCategories = categories.filter(category => category.id !== id);
+    setCategories(updatedCategories);
+    setRows(prevRows => prevRows.filter(row => row.id !== id));
   };
+
+  const handleModalClose = () => {
+    setNewCategory({ imageUrl: '', titles: ['', '', ''], mainHeading: '' });
+    setSelectedCategoryId(null);
+    handleCloseEditModal();
+  };
+
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -194,6 +214,7 @@ const AddCategory = () => {
     setNewCategory({ imageUrl: '', titles: ['', '', ''], mainHeading: '' });
     handleOpenAddModal();
   };
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 20 },
     { field: 'categoryimg', headerName: 'Category Image', width: 150 },
@@ -228,32 +249,36 @@ const AddCategory = () => {
         <div>
           <button
             className='bg-primarycl rounded-md py-1 px-2 text-white flex gap-1'
-            onClick={(event) => handleActionClick(event)}
+            onClick={(event) => handleActionClick(event, params.row.id)}
           >
-              <span className="text-white text-base font-medium">Action</span>
-              <span>
-                <EditIcon className="text-white text-base font-medium" />
-              </span>
+            <span className="text-white text-base font-medium">Action</span>
+            <span>
+              <EditIcon className="text-white text-base font-medium" />
+            </span>
           </button>
           <Menu
             id={`menu-${params.row.id}`}
             anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
+            open={Boolean(anchorEl) && selectedCategoryId === params.row.id}
             onClose={handleActionClose}
           >
-            <MenuItem onClick={() => handleEditMenuClick(params.row.id)}>Edit</MenuItem>
+            <MenuItem onClick={() => handleEdit(params.row.id)}>Edit</MenuItem>
             <MenuItem onClick={() => handleDeleteMenuClick(params.row.id)}>Delete</MenuItem>
           </Menu>
+
         </div>
       ),
+
     },
   ];
 
   return (
     <div className='flex flex-col gap-4'>
-      <div> <button className="bg-primarycl hover:bg-white hover:text-black hover:border hover:border-primarycl rounded-md text-white px-2 h-10" onClick={handleAddNewCategory}>
-        Add New Category
-      </button></div>
+      <div>
+        <button className="bg-primarycl hover:bg-white hover:text-black hover:border hover:border-primarycl rounded-md text-white px-2 h-10" onClick={handleAddNewCategory}>
+          Add New Category
+        </button>
+      </div>
       <Box sx={{ height: 400 }} className='sm:w-fit' >
         <DataGrid
           rows={rows}
@@ -273,7 +298,8 @@ const AddCategory = () => {
         onClose={handleCloseAddModal}
         aria-labelledby="add-modal-title"
         aria-describedby="add-modal-description"
-        className='overflow-auto pb-10'>
+        className='overflow-auto pb-10'
+      >
         <Box sx={style} className='flex flex-col gap-2 rounded-md focus:outline-none'>
           <div className='flex justify-between items-center border-b-2 border-gray-200 py-2 px-4'>
             <h1 className="text-2xl font-semibold">Add New Category</h1>
@@ -334,13 +360,13 @@ const AddCategory = () => {
         </Box>
       </Modal>
 
-
       <Modal
-      open={isEditModalOpen}
-      onClose={handleCloseEditModal}
-      aria-labelledby="edit-modal-title"
-      aria-describedby="edit-modal-description"
-        className='overflow-auto'>
+        open={isEditModalOpen}
+        onClose={handleCloseEditModal}
+        aria-labelledby="edit-modal-title"
+        aria-describedby="edit-modal-description"
+        className='overflow-auto'
+      >
         <Box sx={style} className='flex flex-col gap-2 rounded-md focus:outline-none'>
           <div className='flex justify-between items-center border-b-2 border-gray-200 py-2 px-4'>
             <h1 className="text-2xl font-semibold">Edit Category</h1>

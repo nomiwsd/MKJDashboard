@@ -172,7 +172,7 @@ export default function CountriesTab() {
       renderCell: (params) => {
         const handleCellClick = (event) => {
           event.stopPropagation();
-          console.log("Cell clicked in row with ID: ", params.id);
+          console.log("Cell clicked in row with ID: ", params);
         };
 
         return (
@@ -185,7 +185,8 @@ export default function CountriesTab() {
               aria-expanded={opens ? "true" : undefined}
               onClick={(event) => {
                 handleClick(event);
-                handleEdit(params);
+                seteditData(params)
+                // handleEdit(params);
               }}
             >
               <span>
@@ -196,34 +197,19 @@ export default function CountriesTab() {
                 Action
               </span>
             </button>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={opens}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-            >
-              <MenuItem onClick={() => {
-                setSelectedRow(params.row);
-                handleEdit(params);
-              }}>Edit</MenuItem>
-              <MenuItem onClick={() => {
-                setSelectedRow(params.row);
-                handleDeleteRow();
-              }}>Delete</MenuItem>
-            </Menu>
           </div>
         );
       },
     },
   ];
   
+    
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCountryCode, setSelectedCountryCode] = useState("");
   const [selectedCountryPhone, setSelectedCountryPhone] = useState("");
   const [selectedCurrencyCode, setSelectedCurrencyCode] = useState("");
+  const [editData, seteditData] = useState([]);
+  
 
   const [input, setInput] = useState({
     countryName: "",
@@ -239,11 +225,34 @@ export default function CountriesTab() {
     setInput({ ...input, [name]: value });
   };
 
+  // const onSubmitHandler = (e) => {
+  //   e.preventDefault();
+
+  //   const newCountry = {
+  //     id: rows.length + 1,
+  //     countryName: input.countryName,
+  //     countryCode: input.countryCode,
+  //     currencyCode: input.currencyCode,
+  //     phoneCode: input.phoneCode,
+  //     state: input.state,
+  //     city: input.city,
+  //   };
+
+  //   const existingCountries = JSON.parse(localStorage.getItem("countries")) || [];
+  //   const updatedCountries = [...existingCountries, newCountry];
+
+  //   localStorage.setItem("countries", JSON.stringify(updatedCountries));
+  //   setRows(updatedCountries);
+
+  //   resetHandler();
+  //   handleCloseModal();
+  // };
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
+  
     const newCountry = {
-      id: rows.length + 1,
+      id: rows.length === 0 ? 1 : rows[rows.length - 1].id + 1, // Generate new ID
       countryName: input.countryName,
       countryCode: input.countryCode,
       currencyCode: input.currencyCode,
@@ -251,17 +260,17 @@ export default function CountriesTab() {
       state: input.state,
       city: input.city,
     };
-
+  
     const existingCountries = JSON.parse(localStorage.getItem("countries")) || [];
     const updatedCountries = [...existingCountries, newCountry];
-
+  
     localStorage.setItem("countries", JSON.stringify(updatedCountries));
     setRows(updatedCountries);
-
+  
     resetHandler();
     handleCloseModal();
   };
-
+  
   useEffect(() => {
     const storedCountries = JSON.parse(localStorage.getItem("countries")) || [];
     setRows(storedCountries);
@@ -270,7 +279,7 @@ export default function CountriesTab() {
   const [selectedRow, setSelectedRow] = useState(null);
 
   const handleEdit = (params) => {
-    setSelectedRow(params.row);
+    setSelectedRow(editData.row);
     setOpen(true);
   };
 
@@ -288,9 +297,9 @@ export default function CountriesTab() {
   }, [selectedRow]);
 
   const handleUpdateRow = () => {
-    const rowIndex = rows.findIndex((row) => row.id === selectedRow.id);
+    const rowIndex = rows.findIndex((row) => row.id === editData.id);
     const updatedRow = {
-      ...selectedRow,
+      ...editData,
       countryName: input.countryName,
       countryCode: input.countryCode,
       currencyCode: input.currencyCode,
@@ -306,13 +315,52 @@ export default function CountriesTab() {
   };
 
   const handleDeleteRow = () => {
-    const updatedRows = rows.filter((row) => row.id !== selectedRow.id);
-    setRows(updatedRows);
-
-    localStorage.setItem("countries", JSON.stringify(updatedRows));
+    const updatedRows = rows.filter((row) => row.id !== editData.id);
+  
+    // Update IDs after deletion
+    const updatedRowsWithIDs = updatedRows.map((row, index) => ({ ...row, id: index + 1 }));
+  
+    setRows(updatedRowsWithIDs);
+  
+    localStorage.setItem("countries", JSON.stringify(updatedRowsWithIDs));
   };
+  useEffect(() => {
+    const storedCountries = JSON.parse(localStorage.getItem("countries")) || [];
+    
+    // Handle the case where the table is empty
+    if (storedCountries.length === 0) {
+      setRows([]);
+    } else {
+      setRows(storedCountries);
+    }
+  }, []);
+    
+  
   return (
     <div>
+      <Menu
+      id="basic-menu"
+      anchorEl={anchorEl}
+      open={opens}
+      onClose={handleClose}
+      MenuListProps={{
+        "aria-labelledby": "basic-button",
+      }}
+    >
+      <MenuItem 
+      onClick={() => {
+        handleEdit();
+        handleClose()
+      }}
+      >Edit</MenuItem>
+      <MenuItem 
+      onClick={() => {
+        handleDeleteRow();
+        handleClose()
+
+      }}
+      >Delete</MenuItem>
+    </Menu>
       <button
         onClick={handleAddNewCountry}
         className="rounded-md bg-primarycl h-10 w-48 mb-2 px-4 py-2 text-white"
